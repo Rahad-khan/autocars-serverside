@@ -37,6 +37,7 @@ async function run() {
       const result = await carsCollection.findOne(query);
       res.send(result);
     });
+    //Update Quantity of cars
     app.put("/cars/:id", async (req, res) => {
       const id = req.params.id;
       const carsData = req.body;
@@ -50,6 +51,23 @@ async function run() {
       const result = await carsCollection.updateOne(filter, updateDoc, options);
       res.send(result);
     });
+
+    //Delete A products
+    app.delete("/cars/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await carsCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    //Insert A data
+    app.post("/car", async (req, res) => {
+      const doc = req.body;
+      const result = await carsCollection.insertOne(doc);
+      res.send(result);
+    });
+
+
   } finally {
     // console.log("object");
   }
