@@ -37,6 +37,14 @@ async function run() {
       const result = await carsCollection.findOne(query);
       res.send(result);
     });
+    //Load My items
+    app.get("/myitems", async (req, res) => {
+      const email = req.query.email;
+      const query = { email };
+      const cursor =  carsCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
     //Update Quantity of cars
     app.put("/cars/:id", async (req, res) => {
       const id = req.params.id;
