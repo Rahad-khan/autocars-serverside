@@ -87,6 +87,7 @@ async function run() {
       const updateDoc = {
         $set: {
           quantity: carsData.quantity,
+          sold: carsData.sold
         },
       };
       const result = await carsCollection.updateOne(filter, updateDoc, options);
@@ -109,7 +110,10 @@ async function run() {
     });
 
 
-  }  
+  } 
+  catch(error){
+    console.log(error.message);
+  } 
   finally {
     // console.log("object");
   }
